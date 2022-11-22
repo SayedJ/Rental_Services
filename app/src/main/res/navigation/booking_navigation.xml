@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booking_navigation"
+    app:startDestination="@id/bookingInfoFragment2">
+
+    <fragment
+        android:id="@+id/bookingInfoFragment2"
+        android:name="com.example.rental_services.BookingInfoFragment"
+        android:label="fragment_booking_info"
+        tools:layout="@layout/fragment_booking_info" >
+        <action
+            android:id="@+id/action_bookingInfoFragment2_to_datePickerFromFragment"
+            app:destination="@id/datePickerFromFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/datePickerFromFragment"
+        android:name="com.example.rental_services.DatePickerFromFragment"
+        android:label="fragment_date_picker_from"
+        tools:layout="@layout/fragment_date_picker_from" />
+</navigation>

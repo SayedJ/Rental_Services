@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_navi"
+    app:startDestination="@id/profile_With_info">
+
+    <fragment
+        android:id="@+id/profile_With_info"
+        android:name="com.example.rental_services.profile_With_info"
+        android:label="fragment_profile__with_info"
+        tools:layout="@layout/fragment_profile__with_info" >
+        <action
+            android:id="@+id/action_profile_With_info_to_userItemsAddedFragment"
+            app:destination="@id/userItemsAddedFragment" />
+        <action
+            android:id="@+id/action_profile_With_info_to_itemUserBooked"
+            app:destination="@id/itemUserBooked" />
+        <action
+            android:id="@+id/action_profile_With_info_to_userIinfo"
+            app:destination="@id/userIinfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/userItemsAddedFragment"
+        android:name="com.example.rental_services.UserItemsAddedFragment"
+        android:label="fragment_user_items_added"
+        tools:layout="@layout/fragment_user_items_added" >
+        <action
+            android:id="@+id/action_userItemsAddedFragment_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
+        <action
+            android:id="@+id/action_userItemsAddedFragment_to_profile_With_info"
+            app:destination="@id/profile_With_info" />
+        <argument
+            android:name="items"
+            app:argType="com.example.rental_services.Entities.Item[]"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="com.example.rental_services.ItemDetailsFragment"
+        android:label="fragment_item_details"
+        tools:layout="@layout/fragment_item_details" >
+        <action
+            android:id="@+id/action_itemDetailsFragment_to_userItemsAddedFragment"
+            app:destination="@id/userItemsAddedFragment" />
+        <argument
+            android:name="itemDetail"
+            app:argType="com.example.rental_services.Entities.Item" />
+    </fragment>
+    <fragment
+        android:id="@+id/userIinfo"
+        android:name="com.example.rental_services.userIinfo"
+        android:label="fragment_user_iinfo"
+        tools:layout="@layout/fragment_user_iinfo" >
+        <action
+            android:id="@+id/action_userIinfo_to_profile_With_info"
+            app:destination="@id/profile_With_info" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemUserBooked"
+        android:name="com.example.rental_services.ItemUserBooked"
+        android:label="fragment_item_user_booked"
+        tools:layout="@layout/fragment_item_user_booked" >
+        <action
+            android:id="@+id/action_itemUserBooked_to_profile_With_info"
+            app:destination="@id/profile_With_info" />
+    </fragment>
+</navigation>

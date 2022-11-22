@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".UserItemsFragment"
+    android:id="@+id/user_items">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userItemsRecyclerv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</androidx.fragment.app.FragmentContainerView>
