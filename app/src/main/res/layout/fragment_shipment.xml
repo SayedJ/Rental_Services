@@ -7,32 +7,34 @@
     android:background="@color/white"
     tools:context=".ShipmentFragment">
 
-    <Button
-        android:id="@+id/shipmentButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Next"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.707" />
+
+<!--    <Button-->
+<!--        android:id="@+id/shipmentButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        android:text="Next"-->
+<!--        android:textSize="15sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardView"-->
+<!--        app:layout_constraintVertical_bias="0.707" />-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="373dp"
         android:layout_height="196dp"
-
-
+        android:layout_marginBottom="100dp"
+        android:outlineAmbientShadowColor="@color/black"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -42,10 +44,10 @@
                 android:id="@+id/deliveryIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:clickable="true"
                 android:src="@drawable/ic_baseline_delivery_dining_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:clickable="true"
                 app:layout_constraintHorizontal_bias="0.191"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,8 +57,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/pickupIcon"
                 android:layout_width="50dp"
-                android:clickable="true"
                 android:layout_height="50dp"
+                android:clickable="true"
                 android:src="@drawable/ic_baseline_pin_drop_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,10 +69,10 @@
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:clickable="true"
                 android:id="@+id/glsIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:clickable="true"
                 android:src="@drawable/ic_baseline_airport_shuttle_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -104,10 +106,9 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/pickupIcon"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/pickupIcon"
                 app:layout_constraintTop_toBottomOf="@+id/pickupIcon"
-                app:layout_constraintVertical_bias="0.194" />
+                app:layout_constraintVertical_bias="0.205" />
 
             <TextView
                 android:id="@+id/PostButton"
@@ -126,6 +127,71 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/betweenText"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_shap"
+        android:fontFamily="@font/carter_one"
+        android:gravity="center"
+        android:text="5"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/shapeableImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <TextView
+        android:id="@+id/shipmentFromDate"
+        android:layout_width="51dp"
+        android:layout_height="33dp"
+        android:background="#429A45"
+        android:fontFamily="@font/roboto"
+        android:paddingTop="5dp"
+        android:text="24"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.305"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <TextView
+        android:id="@+id/shipmentToDate"
+        android:layout_width="51dp"
+        android:layout_height="33dp"
+        android:background="#429A45"
+        android:fontFamily="@font/roboto"
+        android:paddingTop="5dp"
+        android:text="24"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shapeableImageView"
+        android:layout_width="58dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_baseline_linear_scale_24"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

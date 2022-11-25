@@ -3,10 +3,11 @@ package com.example.rental_services.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "item_availability_info")
-public class ItemInfo {
+public class ItemInfo implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int itemInfoId;
     private boolean available;

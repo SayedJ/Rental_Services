@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_bookingInfoFragment2_to_datePickerFromFragment"
             app:destination="@id/datePickerFromFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.rental_services.Entities.User" />
     </fragment>
     <fragment
         android:id="@+id/datePickerFromFragment"

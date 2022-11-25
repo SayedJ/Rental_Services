@@ -3,23 +3,29 @@ package com.example.rental_services.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "address")
-public class Address {
+public class Address  implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String house_No;
     private String streetName;
     private int postalCode;
     private String city;
+    private String country;
+
+
+
     private int userCreatorId;
 
 
-    public Address(int id, String house_No, String streetName, int postalCode, String city, int userCreatorId) {
-        this.id = id;
+    public Address(String house_No, String streetName, int postalCode, String city, String country, int userCreatorId) {
         this.house_No = house_No;
         this.streetName = streetName;
         this.postalCode = postalCode;
         this.city = city;
+        this.country = country;
         this.userCreatorId = userCreatorId;
     }
 
@@ -69,5 +75,13 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

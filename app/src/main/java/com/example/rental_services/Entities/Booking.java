@@ -3,8 +3,11 @@ package com.example.rental_services.Entities;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
 @Entity(tableName = "booking_info")
-public class Booking {
+public class Booking implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int bookingId;
@@ -17,8 +20,7 @@ public class Booking {
     private int shipmentId;
     private int itemInfo;
 
-    public Booking(int bookingId, int userCreatorId, String rentalRules, String paymentRules, int booking_info_id, int itemId, int paymentId, int shipmentId) {
-        this.bookingId = bookingId;
+    public Booking(int userCreatorId, String rentalRules, String paymentRules, int booking_info_id, int itemId, int paymentId, int shipmentId) {
         this.userCreatorId = userCreatorId;
         this.rentalRules = rentalRules;
         this.paymentRules = paymentRules;

@@ -2,6 +2,7 @@ package com.example.rental_services;
 
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.WindowDecorActionBar;
@@ -13,7 +14,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.rental_services.Adapters.UserAdapter;
@@ -31,6 +35,7 @@ public class UserInfoActivity extends AppCompatActivity{
     NavController navController;
     Navigation navigation;
     NavHostFragment navhost;
+    ItemViewModel viewModel;
 
     int userId;
     private List<Item> userItems;
@@ -49,7 +54,7 @@ public class UserInfoActivity extends AppCompatActivity{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         navhost = new NavHostFragment();
       navhost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
       navController = navhost.getNavController();
@@ -68,15 +73,23 @@ public class UserInfoActivity extends AppCompatActivity{
     public List<Item> getUserItems() throws ExecutionException, InterruptedException {
         userItems = itemviewm.userWithItems(userId);
         if(userItems == null){
-            Toast.makeText(this, "useritem is null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went Wrong", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "useritem is not null", Toast.LENGTH_SHORT).show();
+
         return userItems;
     }
     public int itemsCount(){
         return userItems.size();
     }
+    public void moveToMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("name", user);
+        startActivity(intent);
+    }
 
+    public void deleteItem(Item item){
+        viewModel.deleteItem(item);
+    }
 
 
 }

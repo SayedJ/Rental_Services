@@ -35,12 +35,6 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
 
     UserViewModel uservm;
-    EditText email;
-    EditText username;
-    EditText name;
-    EditText address;
-    EditText mobile;
-    EditText password;
     int userId;
     Button btn;
     List<Item> userItems = new ArrayList<>();
@@ -48,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
     UserAdapter userAdapter;
     User user;
     ItemViewModel itemviewm;
-    BottomNavigationView bottomNavigationView;
     ActivityMainBinding binding;
-    ItemAdapters itemAdapter;
+    ListOfItemsFragment listOfItemsFragment;
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new ListOfItemsFragment());
                     break;
                 case R.id.person:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(new profile_With_info());
                     break;
                 case R.id.booked:
                     replaceFragment(new SearchFragment());
@@ -77,15 +71,9 @@ public class MainActivity extends AppCompatActivity {
         });
         itemviewm = new ViewModelProvider(this).get(ItemViewModel.class);
         RecyclerView rv = findViewById(R.id.recyclerView);
-//        email = findViewById(R.id.email);
-//        username = findViewById(R.id.username);
-//        name = findViewById(R.id.name);
-//        address = findViewById(R.id.address);
-//        mobile = findViewById(R.id.mobile);
-//        btn = findViewById(R.id.button);
-//        password = findViewById(R.id.password);
         welcomeText = findViewById(R.id.welcomeText);
         user = (User) getIntent().getSerializableExtra("name");
+        listOfItemsFragment = (ListOfItemsFragment) getSupportFragmentManager().findFragmentById(R.id.listofAllItems);
         userId = user.getUserId();
         try {
             itemviewm.userWithItems(userId);
@@ -99,25 +87,21 @@ public class MainActivity extends AppCompatActivity {
 
         welcomeText.setText(user.getUsername());
         userAdapter = new UserAdapter(MainActivity.this);
-//        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-//        bottomNavigationView.setSelectedItemId(R.id.person);
         List<User> users = new ArrayList<User>();
-//
-
         uservm = new ViewModelProvider(this).get(UserViewModel.class);
         rv.hasFixedSize();
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        uservm.getAllUsers().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                if(users != null){
-                    userAdapter.setTheUserList(users);
-                }
-            }
-        });
+//        uservm.getAllUsers().observe(this, new Observer<List<User>>() {
+//            @Override
+//            public void onChanged(List<User> users) {
+//                if(users != null){
+//                    userAdapter.setTheUserList(users);
+//                }
+//            }
+//        });
 
-        rv.setAdapter(userAdapter);
+//        rv.setAdapter(userAdapter);
 
 //        btn.setOnClickListener(View -> {
 //            user = new User(name.getText().toString(), username.getText().toString(), email.getText().toString(), password.getText().toString(), mobile.getText().toString());
@@ -151,12 +135,22 @@ public class MainActivity extends AppCompatActivity {
     public List<Item> getUserItems() throws ExecutionException, InterruptedException {
         userItems = itemviewm.userWithItems(userId);
         if(userItems == null){
-            Toast.makeText(this, "useritem is null", Toast.LENGTH_SHORT).show();
         }
         return userItems;
     }
     public int itemsCount(){
         return userItems.size();
+    }
+
+    public void ToDetailsFragment(Item item){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userItem", item);
+        ItemDetailsFragment fragmentdetas = new ItemDetailsFragment();
+        fragmentdetas.setArguments(bundle);
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.flFragment, fragmentdetas, "listOfItems").addToBackStack("listOfItems");
+        transaction.commit();
     }
 }
 

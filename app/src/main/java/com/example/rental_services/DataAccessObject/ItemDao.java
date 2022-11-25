@@ -3,6 +3,7 @@ package com.example.rental_services.DataAccessObject;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -40,6 +41,9 @@ public interface ItemDao {
     @Transaction
     @Query("Select * from items_info where userCreatorId = :userId")
     LiveData<List<Item>> getUserItemsLive(int userId);
+
+    @Delete
+    void deleteItem(Item item);
 
 
 

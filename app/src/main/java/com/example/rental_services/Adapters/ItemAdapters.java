@@ -1,8 +1,6 @@
 package com.example.rental_services.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rental_services.DetailItemActivity;
 import com.example.rental_services.Entities.Item;
-import com.example.rental_services.Entities.User;
 import com.example.rental_services.R;
 import com.example.rental_services.ViewModels.ItemViewModel;
-import com.example.rental_services.ViewModels.UserViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemAdapters extends RecyclerView.Adapter<ItemAdapters.ViewHolder> {

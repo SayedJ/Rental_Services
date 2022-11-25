@@ -1,8 +1,7 @@
 package com.example.rental_services.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,17 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.rental_services.Adapters.ItemAdapters;
-import com.example.rental_services.DetailItemActivity;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.ItemDetailsFragment;
+import com.example.rental_services.MainActivity;
 import com.example.rental_services.R;
 import com.example.rental_services.ViewModels.ItemViewModel;
-import com.example.rental_services.ViewModels.UserViewModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ListOfItemsFragment extends Fragment {
@@ -65,16 +62,13 @@ public class ListOfItemsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list_of_items, container, false);
         ItemAdapters adapter = new ItemAdapters(new ArrayList<>());
         RecyclerView rv = view.findViewById(R.id.recycler_view);
+        ItemDetailsFragment fragmentDetails = new ItemDetailsFragment();
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setAdapter(adapter);
         adapter.setOnItemClickListener(new ItemAdapters.OnItemClickListener() {
             @Override
             public void onItemClick(Item item) {
-               Intent intent = new Intent(getActivity(), DetailItemActivity.class);
-               intent.putExtra("item", item);
-               startActivity(intent);
-               item.getName();
-               Toast.makeText(getContext(), "this item name is  " + item.getName(), Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).ToDetailsFragment(item);
             }
 
             @Override

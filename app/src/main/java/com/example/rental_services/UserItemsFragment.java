@@ -42,26 +42,26 @@ public class UserItemsFragment extends Fragment {
         RecyclerView recyclerView  = view.findViewById(R.id.userItemsRecyclerv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new ItemAdapters.OnItemClickListener() {
-            @Override
-            public void onItemClick(Item item) {
-                Intent intent = new Intent(getActivity(), DetailItemActivity.class);
-                intent.putExtra("item", item);
-                startActivity(intent);
-                item.getName();
-                Toast.makeText(getContext(), "this item name is  " + item.getName(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDeleteClick(Item item) {
-
-            }
-
-            @Override
-            public void onUpdateClick(Item item) {
-
-            }
-        });
+//        adapter.setOnItemClickListener(new ItemAdapters.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(Item item) {
+//                Intent intent = new Intent(getActivity(), Deta.class);
+//                intent.putExtra("item", item);
+//                startActivity(intent);
+//                item.getName();
+//                Toast.makeText(getContext(), "this item name is  " + item.getName(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onDeleteClick(Item item) {
+//
+//            }
+//
+//            @Override
+//            public void onUpdateClick(Item item) {
+//
+//            }
+//        });
         viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         viewModel.getAllItems().observe(
                 getViewLifecycleOwner(), adapter::setTheItemList);

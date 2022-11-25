@@ -21,4 +21,7 @@
     <string name="register">Register</string>
     <string name="your_name">your name</string>
     <string name="e_mail">email</string>
+    <string name="yourAddress">Please insert your address</string>
+    <string name="next">Confirm/Next</string>
+    <string name="payment">Choose a payment method</string>
 </resources>

@@ -15,12 +15,18 @@ import com.example.rental_services.Entities.ItemInfo;
 import com.example.rental_services.Entities.Payment;
 import com.example.rental_services.Entities.Shipment;
 
+import java.util.List;
+
 @Dao
 public interface BookingSetupDao {
 
     @Transaction
     @Query("SELECT * FROM booking_info")
-    LiveData<Booking> getBooking();
+    LiveData<List<Booking>> getBooking();
+
+    @Transaction
+    @Query("select * from booking_info where userCreatorId == :id")
+    LiveData<List<Booking>> myBookings(int id);
 
     @Transaction
     @Insert

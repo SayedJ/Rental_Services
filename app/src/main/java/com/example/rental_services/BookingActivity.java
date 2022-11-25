@@ -3,6 +3,7 @@ package com.example.rental_services;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -12,20 +13,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.User;
+import com.example.rental_services.ViewModels.ItemViewModel;
 
 public class BookingActivity extends AppCompatActivity{
     private FragmentManager fragmanag;
     NavController navController;
     Navigation navigation;
     Button buttonNext;
+    ItemViewModel viewModel;
     NavHostFragment navhost;
+    User user;
     Item item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        buttonNext = findViewById(R.id.nextButtonAc);
         setContentView(R.layout.activity_booking);
+        viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         item = (Item) getIntent().getSerializableExtra("item");
         navhost = new NavHostFragment();
         navhost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentBookingNav);
@@ -55,25 +62,14 @@ public class BookingActivity extends AppCompatActivity{
         return item;
     }
 
-//    @Override
-//    public void onDatepickerFrom() {
-//        changefrag(new BookingInfoFragment());
-//
-//    }
-//
-//    @Override
-//    public void onBookingItemInfo() {
-//        changefrag(new DatePickerFromFragment());
-//    }
-//    public void changefrag(Fragment frag) {
-//
-//        fragmanag = getSupportFragmentManager();
-//
-//        if (!fragmanag.beginTransaction().isEmpty()) {
-//            fragmanag.beginTransaction().detach(frag);
-//        }
-//        fragmanag.beginTransaction()
-//                .replace(R.id.childFragment, frag).commit();
-//
-//    }
+    public User getUser(){
+        user = new User();
+        user = (User) getIntent().getSerializableExtra("currentUser");
+        return user;
+    }
+
+    public void bookItem(Booking booking){
+        viewModel.addBooking(booking);
+    }
+
 }

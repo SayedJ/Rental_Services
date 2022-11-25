@@ -1,5 +1,7 @@
 package com.example.rental_services;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -73,6 +75,9 @@ public class profile_With_info extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_profile_With_info_to_userIinfo);
             }
         });
+        imageHomeF.setOnClickListener(view -> {
+            ((UserInfoActivity)getActivity()).moveToMainActivity();
+        });
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -94,5 +99,8 @@ public class profile_With_info extends Fragment {
         int userid = ((UserInfoActivity)getActivity()).getCurrentUser().getUserId();
         return userid;
     }
+
+
+
 
 }

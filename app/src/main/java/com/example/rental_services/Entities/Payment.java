@@ -3,8 +3,10 @@ package com.example.rental_services.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "payment")
-public class Payment {
+public class Payment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int paymentId;
@@ -13,8 +15,7 @@ public class Payment {
     private boolean mobilePay;
     private int bInfoId;
 
-    public Payment(int paymentId, boolean creditCard, boolean cash, boolean mobilePay, int bInfoId) {
-        this.paymentId = paymentId;
+    public Payment( boolean creditCard, boolean cash, boolean mobilePay, int bInfoId) {
         this.creditCard = creditCard;
         this.cash = cash;
         this.mobilePay = mobilePay;

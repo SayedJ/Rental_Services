@@ -9,9 +9,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 
+import com.example.rental_services.DataAccessObject.BookingSetupDao;
 import com.example.rental_services.DataAccessObject.ItemDao;
 import com.example.rental_services.DataAccessObject.UserItemsDao;
 import com.example.rental_services.Database.RentalServicesDataBase;
+import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.Ent_Relations.UserWithItems;
 
 import com.example.rental_services.Entities.Item;
@@ -29,6 +31,7 @@ import java.util.concurrent.Future;
 public class UserRepository {
 
     private UserItemsDao userItemsDao;
+    private BookingSetupDao bookingDao;
     private LiveData<List<User>> allUsers;
     private ItemDao itemdao;
     private LiveData<List<UserWithItems>> usersWithItems;
@@ -38,8 +41,10 @@ public class UserRepository {
     private UserRepository(Application application){
         RentalServicesDataBase db = RentalServicesDataBase.getInstance(application);
         userItemsDao = db.userItemDao();
+        bookingDao = db.bookingDao();
         itemdao = db.itemDao();
         allUsers = userItemsDao.loadAllUser();
+
 //        usersWithItems = userItemsDao.loadUserAndItems();
         executors = Executors.newFixedThreadPool(2);
         mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
@@ -83,9 +88,17 @@ public class UserRepository {
 
 
     }
+    public void insertBooking(Booking booking){executors.execute(() -> bookingDao.insertBooking(booking));}
+    public LiveData<List<Booking>> getMyBooking(int id){return bookingDao.myBookings(id);}
+    public LiveData<List<Booking>> getAllBookings(){return bookingDao.getBooking();}
     public LiveData<List<Item>> getuserAllItemsLive(int id){return itemdao.getUserItemsLive(id);};
 //    public LiveData<List<UserWithItems>> getUsersWithItems(){
 //        return userItemsDao.loadUserAndItems();
+    public void deleteItem(Item item)
+    {
+        executors.execute(()-> itemdao.deleteItem(item));
     }
+    }
+
 
 

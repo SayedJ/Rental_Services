@@ -3,18 +3,19 @@ package com.example.rental_services.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 @Entity(tableName = "booking_date_setup")
-public class BookingInfo {
+public class BookingInfo implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int booking_info_id;
     private Date fromDate;
     private Date toDate;
     private Date bookedDate;
-    private String bookingId;
+    private int bookingId;
 
-    public BookingInfo(int booking_info_id, Date fromDate, Date toDate, Date bookedDate, String bookingId) {
-        this.booking_info_id = booking_info_id;
+    public BookingInfo( Date fromDate, Date toDate, Date bookedDate, int bookingId) {
+
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.bookedDate = bookedDate;
@@ -53,11 +54,11 @@ public class BookingInfo {
         this.bookedDate = bookedDate;
     }
 
-    public String getBookingId() {
+    public int getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(String bookingId) {
+    public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
 }
