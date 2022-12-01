@@ -3,6 +3,7 @@ package com.example.rental_services.Repository;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
+import android.telecom.Call;
 
 import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
@@ -13,10 +14,15 @@ import com.example.rental_services.DataAccessObject.BookingSetupDao;
 import com.example.rental_services.DataAccessObject.ItemDao;
 import com.example.rental_services.DataAccessObject.UserItemsDao;
 import com.example.rental_services.Database.RentalServicesDataBase;
+import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
+import com.example.rental_services.Entities.BookingInfo;
 import com.example.rental_services.Entities.Ent_Relations.UserWithItems;
 
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.ItemInfo;
+import com.example.rental_services.Entities.Payment;
+import com.example.rental_services.Entities.Shipment;
 import com.example.rental_services.Entities.User;
 
 import java.net.ResponseCache;
@@ -88,7 +94,22 @@ public class UserRepository {
 
 
     }
-    public void insertBooking(Booking booking){executors.execute(() -> bookingDao.insertBooking(booking));}
+//    public LiveData<Item> getItem(int itemId){return itemdao.getItem(itemId);}
+    public Item getItem(int itemId) throws ExecutionException, InterruptedException{
+        Callable<Item> callable = (Callable<Item>) () -> itemdao.getItem(itemId);
+        Future<Item> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+    public void insertBooking(Booking booking){
+        executors.execute(()-> bookingDao.insertBooking(booking));
+    }
+
+    public void insertBookingInfo(BookingInfo bookingInfo){executors.execute(()->bookingDao.insertBookingSetup(bookingInfo));}
+    public void insertShipment(Shipment shipment){executors.execute(()-> bookingDao.insertShipment(shipment));}
+    public void insertAddress(Address address){executors.execute(()-> bookingDao.insertAddress(address));}
+    public void insertPayment(Payment payment){executors.execute(()-> bookingDao.insertPayment(payment));}
+    public void insertItemInfo(ItemInfo itemInfo){executors.execute(()-> bookingDao.insertItemInfo(itemInfo));}
+
     public LiveData<List<Booking>> getMyBooking(int id){return bookingDao.myBookings(id);}
     public LiveData<List<Booking>> getAllBookings(){return bookingDao.getBooking();}
     public LiveData<List<Item>> getuserAllItemsLive(int id){return itemdao.getUserItemsLive(id);};
@@ -98,7 +119,10 @@ public class UserRepository {
     {
         executors.execute(()-> itemdao.deleteItem(item));
     }
+    public void updateItem(Item item){executors.execute(()-> itemdao.updateItem(item));}
     }
+
+
 
 
 

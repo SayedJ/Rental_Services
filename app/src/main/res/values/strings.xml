@@ -24,4 +24,5 @@
     <string name="yourAddress">Please insert your address</string>
     <string name="next">Confirm/Next</string>
     <string name="payment">Choose a payment method</string>
+    <string name="addProduct">Add</string>
 </resources>

@@ -1,7 +1,8 @@
 package com.example.rental_services.Entities;
 
+import android.net.Uri;
+
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -16,17 +17,16 @@ public class Item  implements Serializable {
     private String model;
     private String brand;
     private Date yearOfPurchase;
+    private String imagepath;
     private double price;
     private int userCreatorId;
-    private int categoryId;
-    private int wishListId;
-    private int bookingId;
     private String item_stand;
 
-    public Item(String name, String model, String brand, Date yearOfPurchase, double price, int userCreatorId) {
+    public Item(String name, String model, String brand, Date yearOfPurchase, double price, int userCreatorId, String imagepath) {
         this.name = name;
         this.model = model;
         this.brand = brand;
+        this.imagepath = imagepath;
         this.yearOfPurchase = yearOfPurchase;
         this.price = price;
         this.userCreatorId = userCreatorId;
@@ -36,6 +36,10 @@ public class Item  implements Serializable {
 
         this.name = model;
         this.brand = brand;
+    }
+
+    public Item() {
+
     }
 
 
@@ -93,30 +97,6 @@ public class Item  implements Serializable {
         this.userCreatorId = userCreatorId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public int getWishListId() {
-        return wishListId;
-    }
-
-    public void setWishListId(int wishListId) {
-        this.wishListId = wishListId;
-    }
-
-    public int getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
-
     public String getItem_stand() {
         return item_stand;
     }
@@ -128,18 +108,26 @@ public class Item  implements Serializable {
         Date datetime = new Date(22, 2, 2020);
 
         return new Item[]{
-                new Item("Laptop", "MacBook", "Apple", datetime , 300, 1),
-                new Item("TV", "Android", "Samsung", datetime , 150, 2),
-                new Item("Radio", "Hitachi", "Motachi", datetime , 50, 3),
-                new Item("PS4", "Compact", "Sony", datetime , 300, 4),
-                new Item("Car", "I30", "Apple", datetime , 999, 5),
-                new Item("Gun", "Revolver", "Russian", datetime , 745, 2),
+                new Item("Laptop", "MacBook", "Apple", datetime , 300, 1, null),
+                new Item("TV", "Android", "Samsung", datetime , 150, 2, null),
+                new Item("Radio", "Hitachi", "Motachi", datetime , 50, 3, null),
+                new Item("PS4", "Compact", "Sony", datetime , 300, 4, null),
+                new Item("Car", "I30", "Apple", datetime , 999, 5, null),
+                new Item("Gun", "Revolver", "Russian", datetime , 745, 2, null),
 
         };
 
 
 
     }
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
+
 
 
 

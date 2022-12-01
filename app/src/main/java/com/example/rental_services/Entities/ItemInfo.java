@@ -18,8 +18,7 @@ public class ItemInfo implements Serializable {
 
     private int booking_info_id;
 
-    public ItemInfo(int itemInfoId, boolean available, boolean rented, Date nextAvailableDate, int booking_info_id) {
-        this.itemInfoId = itemInfoId;
+    public ItemInfo(boolean available, boolean rented, Date nextAvailableDate, int booking_info_id) {
         this.available = available;
         this.rented = rented;
         this.nextAvailableDate = nextAvailableDate;

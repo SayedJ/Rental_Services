@@ -1,5 +1,8 @@
 package com.example.rental_services;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     UserAdapter userAdapter;
     User user;
     ItemViewModel itemviewm;
+    ItemDetailsFragment detailsFragment;
     ActivityMainBinding binding;
     ListOfItemsFragment listOfItemsFragment;
     FragmentManager fragmentManager;
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerView);
         welcomeText = findViewById(R.id.welcomeText);
         user = (User) getIntent().getSerializableExtra("name");
+
+
         listOfItemsFragment = (ListOfItemsFragment) getSupportFragmentManager().findFragmentById(R.id.listofAllItems);
         userId = user.getUserId();
         try {
@@ -142,15 +148,31 @@ public class MainActivity extends AppCompatActivity {
         return userItems.size();
     }
 
-    public void ToDetailsFragment(Item item){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userItem", item);
-        ItemDetailsFragment fragmentdetas = new ItemDetailsFragment();
-        fragmentdetas.setArguments(bundle);
-        fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.flFragment, fragmentdetas, "listOfItems").addToBackStack("listOfItems");
-        transaction.commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        detailsFragment = new ItemDetailsFragment();
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                Intent intent = new Intent(this, UserInfoActivity.class);
+                intent.putExtra("frag","detailsFragment") ;
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
+
+//    public void ToDetailsFragment(Item item){
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("userItem", item);
+//        ItemDetailsFragment fragmentdetas = new ItemDetailsFragment();
+//        fragmentdetas.setArguments(bundle);
+//        fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.flFragment, fragmentdetas, "listOfItems").addToBackStack("listOfItems");
+//        transaction.commit();
+//    }
 }
 

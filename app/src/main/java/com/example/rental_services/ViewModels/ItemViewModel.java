@@ -7,8 +7,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.rental_services.Database.RentalServicesDataBase;
+import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
+import com.example.rental_services.Entities.BookingInfo;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.ItemInfo;
+import com.example.rental_services.Entities.Payment;
+import com.example.rental_services.Entities.Shipment;
 import com.example.rental_services.Entities.User;
 import com.example.rental_services.Repository.UserRepository;
 
@@ -26,12 +31,12 @@ public class ItemViewModel extends AndroidViewModel {
         items = RentalServicesDataBase.getInstance(getApplication()).userItemDao().loadAllItems();
         repo = UserRepository.getInstance(application);
         bookings = RentalServicesDataBase.getInstance(getApplication()).bookingDao().getBooking();
-
-
-
     }
-
-
+    public Item getItem(int itemId) throws ExecutionException, InterruptedException {
+        Item item;
+        item = repo.getItem(itemId);
+        return item;
+    }
     public LiveData<List<Item>> getAllItems(){return repo.getAllItems();}
     public List<Item> userWithItems(int id) throws ExecutionException, InterruptedException {
 
@@ -54,11 +59,27 @@ public class ItemViewModel extends AndroidViewModel {
         repo.deleteItem(item);
     }
 
-    public void addBooking(Booking booking){
+    public void addBooking(Booking booking) {
         repo.insertBooking(booking);
     }
     public LiveData<List<Booking>> allBookings(){
         return repo.getAllBookings();
     }
+    public void addAddress(Address address){
+        repo.insertAddress(address);
+    }
+    public void addPayment(Payment payment){
+        repo.insertPayment(payment);
+    }
+    public void addItemInfo(ItemInfo itemInfo){
+        repo.insertItemInfo(itemInfo);
+    }
+    public void addBookingInfo(BookingInfo bookingInfo){
+        repo.insertBookingInfo(bookingInfo);
+    }
+    public void addShipment(Shipment shipment){
+        repo.insertShipment(shipment);
+    }
+    public void updateItem(Item item){repo.updateItem(item);}
 
 }

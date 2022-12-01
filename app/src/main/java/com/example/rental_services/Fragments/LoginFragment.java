@@ -1,6 +1,8 @@
 package com.example.rental_services.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.example.rental_services.MainActivity;
 import com.example.rental_services.R;
 import com.example.rental_services.UserInfoActivity;
 import com.example.rental_services.ViewModels.UserViewModel;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,17 +32,14 @@ public class LoginFragment extends Fragment {
 
 
     EditText email, password;
-    Button btn;
     UserViewModel viewModel;
 
-    User user;
 
     public LoginFragment() {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_login, container, false);
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         Button clickButton = rootView.findViewById(R.id.btn_login);
@@ -54,10 +54,9 @@ public class LoginFragment extends Fragment {
                 User newUser = null;
                 String enteredEmail = email.getText().toString();
                 String enteredPassword = password.getText().toString();
-                if(enteredEmail.isEmpty() || enteredPassword.isEmpty()){
+                if (enteredEmail.isEmpty() || enteredPassword.isEmpty()) {
                     Toast.makeText(getContext(), "fill all the fields!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -69,38 +68,19 @@ public class LoginFragment extends Fragment {
                                         Toast.makeText(getContext(), "user is null", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-//                        Intent intent = new Intent(getActivity(), MainActivity.class);
-////                        intent.putExtra("loginUser", newUser);
-//                        startActivity(intent);
                             } else {
-//                                String name = newUser.getFullName();
+
                                 startActivity(new Intent(getActivity(), UserInfoActivity.class).putExtra("name", newUser));
                             }
                         }
                     }).start();
 
 
-
 //                    Toast.makeText(getContext(), "button in fragment 1" + enteredEmail, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        
+
         return rootView;
-
-//        email = container.findViewById(R.id.email);
-//        password = container.findViewById(R.id.password);
-//        btn = container.findViewById(R.id.btn_login);
-
     }
-
-//    public LiveData<User> login(String email, String password){
-//       LiveData<User> user = viewModel.login(email, password);
-//        if(user != null)
-//        {
-//            return user;
-//        }
-//        return null;
-//    }
 }

@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 
 import com.example.rental_services.Entities.Ent_Relations.WishlistWithItems;
@@ -44,6 +45,15 @@ public interface ItemDao {
 
     @Delete
     void deleteItem(Item item);
+
+    @Transaction
+    @Query("select * from items_info where itemId = :itemId")
+    Item getItem(int itemId);
+
+    @Update
+    void updateItem(Item item);
+
+
 
 
 

@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 import com.example.rental_services.Adapters.ItemAdapters;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.User;
 import com.example.rental_services.ViewModels.ItemViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,9 @@ public class UserItemsAddedFragment extends Fragment {
     private  ItemAdapters adapters;;
     TextView userItemCounted;
     String item = " ";
+    User user;
     public Item recieviedItem;
+    FloatingActionButton floatBtn;
     public UserItemsAddedFragment() {
         // Required empty public constructor
     }
@@ -57,7 +62,9 @@ public class UserItemsAddedFragment extends Fragment {
         getActivity().setTitle("My Items");
         userItemCounted = rootView.findViewById(R.id.userItemCounted);
         recyclerView = rootView.findViewById(R.id.recyclerView2);
+        floatBtn = rootView.findViewById(R.id.fab);
         recyclerView.hasFixedSize();
+        user = ((UserInfoActivity)getActivity()).getCurrentUser();
         adapters = new ItemAdapters(new ArrayList<>());
         recyclerView.setAdapter(adapters);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -78,6 +85,7 @@ public class UserItemsAddedFragment extends Fragment {
             public void onItemClick(Item item) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("userItem", item);
+                bundle.putSerializable("user", user);
                 Navigation.findNavController(rootView).navigate(R.id.action_userItemsAddedFragment_to_itemDetailsFragment, bundle);
 
             }
@@ -91,6 +99,9 @@ public class UserItemsAddedFragment extends Fragment {
             public void onUpdateClick(Item item) {
 
             }
+        });
+        floatBtn.setOnClickListener(view -> {
+           Navigation.findNavController(rootView).navigate(R.id.action_userItemsAddedFragment_to_addAProductFragment);
         });
 
         // Inflate the layout for this fragment

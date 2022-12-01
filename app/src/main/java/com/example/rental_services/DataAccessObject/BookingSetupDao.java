@@ -8,6 +8,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+
+import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.BookingInfo;
 import com.example.rental_services.Entities.Item;
@@ -31,7 +33,7 @@ public interface BookingSetupDao {
     @Transaction
     @Insert
     void insertBooking(Booking booking);
-
+    @Transaction
     @Insert
     void insertBookingSetup(BookingInfo bookingInfo);
 
@@ -42,6 +44,9 @@ public interface BookingSetupDao {
     @Transaction
     @Insert
     void insertShipment(Shipment shipment);
+    @Transaction
+    @Insert
+    void insertAddress(Address address);
 
     @Transaction
     @Insert

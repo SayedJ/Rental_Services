@@ -23,12 +23,14 @@ import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.BookingInfo;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.ItemInfo;
 import com.example.rental_services.Entities.Payment;
 import com.example.rental_services.Entities.Shipment;
 import com.example.rental_services.Entities.User;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +47,7 @@ public class PaymentFragment extends Fragment {
     Booking booking;
     Payment payment;
     Shipment shipment;
+    ItemInfo itemInfo;
     User user;
     Item item;
     Address address;
@@ -81,7 +84,13 @@ public class PaymentFragment extends Fragment {
             startAnimationCardClick();
         });
         btn_payment.setOnClickListener(v -> {
-            goToLastFragment();
+            try {
+                goToLastFragment();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
         return view;
     }
@@ -157,13 +166,17 @@ public class PaymentFragment extends Fragment {
         address = (Address) getArguments().getSerializable("address");
         user = ((BookingActivity)getActivity()).getUser();
         item = ((BookingActivity)getActivity()).getItem();
+        itemInfo = new ItemInfo(false, true, bookingInfo.getToDate(), bookingInfo.getBooking_info_id());
     }
-    public void goToLastFragment(){
+    public void goToLastFragment() throws ExecutionException, InterruptedException {
 //        (int userCreatorId, String rentalRules, String paymentRules, int booking_info_id, int itemId, int paymentId, int shipmentId)
         getData();
         booking = new Booking(user.getUserId(), "Take Care of this item as of your own", "Payment will be made after the item is returned", bookingInfo.getBooking_info_id(), item.getItemId(), payment.getPaymentId(), shipment.getShipmentId());
         ((BookingActivity)getActivity()).bookItem(booking);
+
         Bundle bundle = new Bundle();
+        address.setUserCreatorId(user.getUserId());
+        ((BookingActivity)getActivity()).insertAllBookingInfo(shipment, itemInfo, bookingInfo, payment, address);
         bundle.putSerializable("address", address);
         bundle.putSerializable("dateObj", bookingInfo);
         bundle.putSerializable("shipment", shipment);

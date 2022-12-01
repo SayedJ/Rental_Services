@@ -13,10 +13,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
+import com.example.rental_services.Entities.BookingInfo;
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.Entities.ItemInfo;
+import com.example.rental_services.Entities.Payment;
+import com.example.rental_services.Entities.Shipment;
 import com.example.rental_services.Entities.User;
 import com.example.rental_services.ViewModels.ItemViewModel;
+
+import java.util.concurrent.ExecutionException;
 
 public class BookingActivity extends AppCompatActivity{
     private FragmentManager fragmanag;
@@ -68,8 +75,15 @@ public class BookingActivity extends AppCompatActivity{
         return user;
     }
 
-    public void bookItem(Booking booking){
-        viewModel.addBooking(booking);
+    public void bookItem(Booking booking) {
+       viewModel.addBooking(booking);
+    }
+    public void insertAllBookingInfo(Shipment shipment, ItemInfo itemInfo, BookingInfo bookingInfo, Payment payment, Address address){
+        viewModel.addShipment(shipment);
+        viewModel.addPayment(payment);
+        viewModel.addAddress(address);
+        viewModel.addBookingInfo(bookingInfo);
+        viewModel.addItemInfo(itemInfo);
     }
 
 }
