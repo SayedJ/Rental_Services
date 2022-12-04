@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.rental_services.Database.BookingWithDetails;
 import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.BookingInfo;
@@ -75,15 +76,25 @@ public class BookingActivity extends AppCompatActivity{
         return user;
     }
 
-    public void bookItem(Booking booking) {
-       viewModel.addBooking(booking);
+    public long bookItem(Booking booking) {
+       return viewModel.addBooking(booking);
     }
-    public void insertAllBookingInfo(Shipment shipment, ItemInfo itemInfo, BookingInfo bookingInfo, Payment payment, Address address){
-        viewModel.addShipment(shipment);
-        viewModel.addPayment(payment);
-        viewModel.addAddress(address);
-        viewModel.addBookingInfo(bookingInfo);
-        viewModel.addItemInfo(itemInfo);
+    public long insertAllBookingInfo(Shipment shipment, ItemInfo itemInfo, BookingInfo bookingInfo, Payment payment, Address address, Booking booking, BookingWithDetails bookingWithDetails){
+        long addressId = viewModel.addAddress(address);
+        shipment.setAddressId(addressId);
+       long shipmentId = viewModel.addShipment(shipment);
+        long paymentId = viewModel.addPayment(payment);
+        long bookingInforId = viewModel.addBookingInfo(bookingInfo);
+        long itemInfoId = viewModel.addItemInfo(itemInfo);
+       booking.setShipmentId(shipmentId);
+       booking.setPaymentId(paymentId);
+
+       booking.setBooking_info_id(bookingInforId);
+       booking.setItemInfo(itemInfoId);
+      long bookedId = bookItem(booking);
+      bookingWithDetails.setBookingId(bookedId);
+      long bookingWithDetailsId = viewModel.insertBookingWithDetails(bookingWithDetails);
+        return bookedId;
     }
 
 }

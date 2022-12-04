@@ -57,8 +57,9 @@ public class DatePickerToFragment extends Fragment {
         Date recievedDate = (Date) getArguments().getSerializable("datePicked");
         ShipmentFragment fragmentShip = new ShipmentFragment();
             button.setOnClickListener(view -> {
+                Date date = new Date();
             Bundle bundle = new Bundle();
-            bookingInfo = new BookingInfo(recievedDate, getToDate(), null, 0);
+            bookingInfo = new BookingInfo(recievedDate, getToDate(),date);
             bundle.putSerializable("date", bookingInfo);
             fragmentShip.setArguments(bundle);
             FragmentManager manager = getParentFragmentManager();

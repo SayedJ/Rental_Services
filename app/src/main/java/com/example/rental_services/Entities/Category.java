@@ -8,21 +8,21 @@ import java.io.Serializable;
 @Entity(tableName= "categories")
 public class Category implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int categoryId;
+    private long categoryId;
     private String name;
 
 
-    public Category(int categoryId, String name){
+    public Category(long categoryId, String name){
         this.categoryId = categoryId;
         this.name = name;
 
     }
 
-    public int getCategoryId() {
+    public long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
     }
 

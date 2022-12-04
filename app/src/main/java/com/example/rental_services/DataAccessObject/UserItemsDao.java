@@ -57,7 +57,7 @@ public interface UserItemsDao {
 
     @Transaction
     @Query("SELECT * FROM user_info WHERE userId = :id")
-    LiveData<User> loadUserById(int id);
+    LiveData<User> loadUserById(long id);
 
     @Transaction
     @Query("SELECT * FROM user_info")

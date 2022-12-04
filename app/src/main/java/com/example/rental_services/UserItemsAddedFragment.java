@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class UserItemsAddedFragment extends Fragment {
 
     LiveData<Item> userItems;
     private RecyclerView recyclerView;
-    int userId;
+    long userId;
     private  ItemAdapters adapters;;
     TextView userItemCounted;
     String item = " ";
@@ -56,7 +57,7 @@ public class UserItemsAddedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        userId = getArguments().getInt("userId");
+        userId = ((UserInfoActivity)getActivity()).getCurrentUser().getUserId();
         ItemViewModel viewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
          View rootView = inflater.inflate(R.layout.fragment_user_items_added, container, false);
         getActivity().setTitle("My Items");
@@ -84,8 +85,10 @@ public class UserItemsAddedFragment extends Fragment {
             @Override
             public void onItemClick(Item item) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("userItem", item);
-                bundle.putSerializable("user", user);
+                bundle.putSerializable("itemAdded", item);
+                bundle.putSerializable("name", user);
+
+
                 Navigation.findNavController(rootView).navigate(R.id.action_userItemsAddedFragment_to_itemDetailsFragment, bundle);
 
             }

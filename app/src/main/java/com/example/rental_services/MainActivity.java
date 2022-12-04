@@ -38,7 +38,7 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
 
     UserViewModel uservm;
-    int userId;
+    long userId;
     Button btn;
     List<Item> userItems = new ArrayList<>();
     TextView welcomeText;
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 //        mobile.setText("");
 //        password.setText("");
 //    }
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flFragment, fragment);
@@ -147,20 +147,20 @@ public class MainActivity extends AppCompatActivity {
     public int itemsCount(){
         return userItems.size();
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        detailsFragment = new ItemDetailsFragment();
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
-                Intent intent = new Intent(this, UserInfoActivity.class);
-                intent.putExtra("frag","detailsFragment") ;
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        detailsFragment = new ItemDetailsFragment();
+//        switch (item.getItemId()) {
+//
+//            case R.id.person:
+//                Intent intent = new Intent(this, UserInfoActivity.class);
+//                intent.putExtra("frag","profile") ;
+//                startActivity(intent);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
 
     }
 
@@ -174,5 +174,4 @@ public class MainActivity extends AppCompatActivity {
 //        transaction.replace(R.id.flFragment, fragmentdetas, "listOfItems").addToBackStack("listOfItems");
 //        transaction.commit();
 //    }
-}
 

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity(tableName = "user_info")
 public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int userId;
+    private long userId;
     private String fullName;
     private String username;
     private String email;
@@ -35,11 +35,11 @@ public class User implements Serializable {
 
 
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

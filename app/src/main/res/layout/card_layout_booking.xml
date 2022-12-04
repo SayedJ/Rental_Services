@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/listOfallBookedItems"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="5dp"
+    android:clickable="true"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/productImageBooked"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="left"
+            android:adjustViewBounds="true"
+            android:contentDescription="image"
+
+            android:scaleType="centerCrop"
+            android:src="@drawable/ps4pro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.111" />
+
+        <TextView
+            android:id="@+id/bookedProductBrand"
+            android:layout_width="101dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:text="Brand"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="@+id/bookedProductModel"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/bookedProductModel"
+            app:layout_constraintTop_toBottomOf="@+id/bookedProductModel" />
+
+        <TextView
+            android:id="@+id/bookedProductModel"
+            android:layout_width="101dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Model"
+
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="@+id/productBookedName"
+            app:layout_constraintStart_toStartOf="@+id/productBookedName"
+            app:layout_constraintTop_toBottomOf="@+id/productBookedName" />
+
+        <TextView
+            android:id="@+id/bookedtPrice"
+            android:layout_width="101dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginStart="165dp"
+            android:paddingLeft="20dp"
+            android:text="price"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/productImageBooked"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.071" />
+
+        <TextView
+
+            android:id="@+id/productBookedName"
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Product"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="@+id/productImageBooked"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/productImageBooked"
+            app:layout_constraintTop_toBottomOf="@+id/productImageBooked" />
+
+
+        <TextView
+
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="4dp"
+            android:text="From:"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/productImageBooked"
+            app:layout_constraintTop_toBottomOf="@+id/bookedtPrice" />
+
+        <TextView
+            android:id="@+id/bookedFromDate"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/archivo_narrow_italic"
+            android:text="22-2-2020"
+            android:textAlignment="textStart"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.179"
+            app:layout_constraintStart_toEndOf="@+id/productImageBooked"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/bookedToDate"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:fontFamily="@font/archivo_narrow_italic"
+            android:text="22-2-2020"
+            android:textAlignment="textStart"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@+id/bookedFromDate"
+            app:layout_constraintHorizontal_bias="0.184"
+            app:layout_constraintStart_toStartOf="@+id/bookedFromDate"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="52dp"
+            android:text="To:"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/bookedtPrice" />
+
+        <TextView
+
+            android:id="@+id/bookedPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="156dp"
+            android:text="Payment:"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/bookedShipment"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="216dp"
+            android:text="Shipment:"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/bookedPayment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/bookedPaymentPaidVia"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="188dp"
+            android:fontFamily="@font/archivo_narrow_italic"
+            android:text="Credit Card"
+            android:textAlignment="textStart"
+            android:textSize="13sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/bookedToDate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/bookedShipmentDes"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="248dp"
+            android:text="Delivery"
+            android:textSize="13sp"
+            android:fontFamily="@font/archivo_narrow_italic"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/bookedPaymentPaidVia"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

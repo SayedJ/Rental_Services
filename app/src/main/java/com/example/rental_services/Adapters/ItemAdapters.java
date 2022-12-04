@@ -1,7 +1,9 @@
 package com.example.rental_services.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rental_services.Entities.Item;
+import com.example.rental_services.MainActivity;
 import com.example.rental_services.R;
 import com.example.rental_services.ViewModels.ItemViewModel;
 import com.squareup.picasso.Picasso;
@@ -27,6 +32,7 @@ public class ItemAdapters extends RecyclerView.Adapter<ItemAdapters.ViewHolder> 
     private OnClickListener listener;
     private ItemViewModel itemvm;
     private Item item;
+    private RecyclerView recyclerView;
     private OnItemClickListener onItemClickListener;
     Uri uri;
     public ItemAdapters(Context context ){
@@ -55,33 +61,11 @@ public class ItemAdapters extends RecyclerView.Adapter<ItemAdapters.ViewHolder> 
        holder.brand.setText(items.get(position).getBrand());
        holder.model.setText(items.get(position).getModel());
        holder.price.setText(String.valueOf(items.get(position).getPrice()) + " kr/day");
+
         Picasso.get()
                 .load(items.get(position).getImagepath())
                 .into(holder.imageView);
-//       holder.imageView.setImageURI(Uri.parse(items.get(position).getImagepath()));
 
-
-//       holder.name.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//           public void onClick(View view) {
-//               int positiont = holder.getAdapterPosition();
-//               if(onItemClickListener != null && positiont != RecyclerView.NO_POSITION) {
-//               }
-//
-//           }
-//       });
-//       holder.itemView.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//           public void onClick(View view) {
-//               if(onItemClickListener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
-//                   onItemClickListener.onItemClick(items.get(position));
-//                   Intent intent = new Intent(context, DetailItemActivity.class);
-//                   intent.putExtra("Number", items.get(position).getItemId());
-//                   context.startActivity(intent);
-//
-//               }
-//           }
-//       });
 
 
     }

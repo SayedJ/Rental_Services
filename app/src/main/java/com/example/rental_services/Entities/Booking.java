@@ -10,17 +10,18 @@ import java.io.Serializable;
 public class Booking implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int bookingId;
-    private int userCreatorId;
+    private long bookingId;
+    private long userCreatorId;
     private String rentalRules;
     private String paymentRules;
-    private int booking_info_id;
-    private int itemId;
-    private int paymentId;
-    private int shipmentId;
-    private int itemInfo;
+    private long booking_info_id;
+    private long itemId;
+    private long paymentId;
+    private long shipmentId;
+    private long itemInfo;
+    private long ownerId;
 
-    public Booking(int userCreatorId, String rentalRules, String paymentRules, int booking_info_id, int itemId, int paymentId, int shipmentId) {
+    public Booking(long userCreatorId, String rentalRules, String paymentRules, long booking_info_id, long itemId, long paymentId, long shipmentId, long ownerId) {
         this.userCreatorId = userCreatorId;
         this.rentalRules = rentalRules;
         this.paymentRules = paymentRules;
@@ -30,19 +31,19 @@ public class Booking implements Serializable {
         this.shipmentId = shipmentId;
     }
 
-    public int getBookingId() {
+    public long getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(long bookingId) {
         this.bookingId = bookingId;
     }
 
-    public int getUserCreatorId() {
+    public long getUserCreatorId() {
         return userCreatorId;
     }
 
-    public void setUserCreatorId(int userCreatorId) {
+    public void setUserCreatorId(long userCreatorId) {
         this.userCreatorId = userCreatorId;
     }
 
@@ -64,44 +65,52 @@ public class Booking implements Serializable {
 
 
 
-    public int getItemId() {
+    public long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(long itemId) {
         this.itemId = itemId;
     }
 
-    public int getPaymentId() {
+    public long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
     }
 
 
-    public int getShipmentId() {
+    public long getShipmentId() {
         return shipmentId;
     }
 
-    public void setShipmentId(int shipmentId) {
+    public void setShipmentId(long shipmentId) {
         this.shipmentId = shipmentId;
     }
 
-    public int getItemInfo() {
+    public long getItemInfo() {
         return itemInfo;
     }
 
-    public void setItemInfo(int itemInfo) {
+    public void setItemInfo(long itemInfo) {
         this.itemInfo = itemInfo;
     }
 
-    public int getBooking_info_id() {
+    public long getBooking_info_id() {
         return booking_info_id;
     }
 
-    public void setBooking_info_id(int booking_info_id) {
+    public void setBooking_info_id(long booking_info_id) {
         this.booking_info_id = booking_info_id;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 }

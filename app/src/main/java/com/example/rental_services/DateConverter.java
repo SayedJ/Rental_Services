@@ -15,4 +15,7 @@ public class DateConverter {
     public static Long fromDate(Date date){
         return date == null ? null : date.getTime();
     }
+
+
+
 }

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.rental_services.Database.BookingWithDetails;
 import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
 import com.example.rental_services.Entities.BookingInfo;
@@ -79,7 +80,7 @@ public class PaymentFragment extends Fragment {
         removeViews();
         animationBaseView();
         card.setOnClickListener(view1 -> {
-            payment = new Payment(true, false, false, 0);
+            payment = new Payment(true, false, false);
 
             startAnimationCardClick();
         });
@@ -166,17 +167,23 @@ public class PaymentFragment extends Fragment {
         address = (Address) getArguments().getSerializable("address");
         user = ((BookingActivity)getActivity()).getUser();
         item = ((BookingActivity)getActivity()).getItem();
-        itemInfo = new ItemInfo(false, true, bookingInfo.getToDate(), bookingInfo.getBooking_info_id());
+        itemInfo = new ItemInfo(false, true, bookingInfo.getToDate());
     }
     public void goToLastFragment() throws ExecutionException, InterruptedException {
 //        (int userCreatorId, String rentalRules, String paymentRules, int booking_info_id, int itemId, int paymentId, int shipmentId)
         getData();
-        booking = new Booking(user.getUserId(), "Take Care of this item as of your own", "Payment will be made after the item is returned", bookingInfo.getBooking_info_id(), item.getItemId(), payment.getPaymentId(), shipment.getShipmentId());
-        ((BookingActivity)getActivity()).bookItem(booking);
+        String paymentMethod = getRightPayment(payment.isCreditCard(), payment.isCash(), payment.isMobilePay());
+        String shipmentMethod = getRightShipment(shipment.isOwner_delivery(), shipment.isPick_up(), shipment.isShipmentByPost());
+        booking = new Booking(user.getUserId(), "Take Care of this item as of your own", "Payment will be made after the item is returned", bookingInfo.getBooking_info_id(), item.getItemId(), payment.getPaymentId(), shipment.getShipmentId(), item.getUserCreatorId());
+        BookingWithDetails bookingDetails = new BookingWithDetails(booking.getBookingId(), user.getUserId(), bookingInfo.getFromDate(),
+                bookingInfo.getToDate(), item.getName(), item.getModel(), item.getBrand(), shipmentMethod,
+                paymentMethod, "is Rented", user.getFullName(), String.valueOf(item.getPrice()), item.getImagepath());
+
 
         Bundle bundle = new Bundle();
         address.setUserCreatorId(user.getUserId());
-        ((BookingActivity)getActivity()).insertAllBookingInfo(shipment, itemInfo, bookingInfo, payment, address);
+        long bookingId = ((BookingActivity)getActivity()).insertAllBookingInfo(shipment, itemInfo, bookingInfo, payment, address, booking, bookingDetails);
+//        ((BookingActivity)getActivity()).bookItem(booking);
         bundle.putSerializable("address", address);
         bundle.putSerializable("dateObj", bookingInfo);
         bundle.putSerializable("shipment", shipment);
@@ -190,5 +197,35 @@ public class PaymentFragment extends Fragment {
         transaction.commit();
     }
 
+    private String getRightPayment(boolean creditCard, boolean cash, boolean mobilePay) {
+        String s;
+        if (creditCard = true) {
+            s = "Credit Card";
+        } else if (cash = true) {
+            s = "Cash";
+        } else if (mobilePay = true) {
+            s = "Mobilepay";
+        } else {
+            s = "Not Paid yet";
+        }
+        return s;
+    }
 
-}
+
+    private String getRightShipment(boolean delivery, boolean pickup, boolean post){
+        String s;
+        if (delivery = true) {
+            s = "Delivery";
+        } else if (pickup = true) {
+            s = "Pickup";
+        } else if (post = true) {
+            s = "Post";
+        } else {
+            s = "Not Chosen";
+        }
+        return s;
+    }
+    }
+
+
+

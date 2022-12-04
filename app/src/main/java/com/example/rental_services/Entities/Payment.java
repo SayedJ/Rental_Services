@@ -1,6 +1,7 @@
 package com.example.rental_services.Entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -9,24 +10,27 @@ import java.io.Serializable;
 public class Payment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int paymentId;
+    private long paymentId;
     private boolean creditCard;
     private boolean cash;
     private boolean mobilePay;
-    private int bInfoId;
 
-    public Payment( boolean creditCard, boolean cash, boolean mobilePay, int bInfoId) {
+
+    public Payment( boolean creditCard, boolean cash, boolean mobilePay) {
         this.creditCard = creditCard;
         this.cash = cash;
         this.mobilePay = mobilePay;
-        this.bInfoId = bInfoId;
+
+    }
+    @Ignore
+    public Payment() {
     }
 
-    public int getPaymentId() {
+    public long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -54,11 +58,4 @@ public class Payment implements Serializable {
         this.mobilePay = mobilePay;
     }
 
-    public int getBInfoId() {
-        return bInfoId;
-    }
-
-    public void setBInfoId(int bInfoId) {
-        this.bInfoId = bInfoId;
-    }
 }

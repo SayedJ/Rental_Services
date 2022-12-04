@@ -47,19 +47,19 @@ import com.example.rental_services.Entities.User;
 })
 public class BookingWithAllInfo {
     @PrimaryKey
-    public int bookingId;
+    public long bookingId;
     @ColumnInfo(name = "booking_info_id", index = true)
-    public int booking_info_id;
+    public long booking_info_id;
     @ColumnInfo(name = "itemInfoId", index = true)
-    public int itemInfoId;
+    public long itemInfoId;
     @ColumnInfo(name = "paymentId", index = true)
-    public int paymentId;
+    public long paymentId;
     @ColumnInfo(name = "shipmentId", index = true)
-    public int shipmentId;
+    public long shipmentId;
     @ColumnInfo(name = "itemId", index = true)
-    public int itemId;
+    public long itemId;
     @ColumnInfo(name = "bookerId", index = true)
-    public int bookerId;
+    public long bookerId;
     public String rentalRules;
     public String paymentRules;
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ import com.example.rental_services.Entities.Item;
 import com.example.rental_services.Entities.User;
 import com.example.rental_services.Fragments.LoginFragment;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,8 +43,9 @@ import java.util.Date;
 public class ItemDetailsFragment extends Fragment {
     TextView name, brand, model, dateOfPurchased, itemStand, price;
     private Item item;
-    Button wishListButton, bookButton;
+    Button bookButton;
     ImageButton  deleteBtn, updateBtn;
+    ImageView imageView;
     public ItemDetailsFragment() {
         // Required empty public constructor
     }
@@ -57,35 +61,43 @@ public class ItemDetailsFragment extends Fragment {
         model = rootView.findViewById(R.id.detailModelF);
         dateOfPurchased = rootView.findViewById(R.id.detailYearF);
         itemStand = rootView.findViewById(R.id.detailStandF);
-        wishListButton = rootView.findViewById(R.id.detailAddToWishList);
         bookButton = rootView.findViewById(R.id.detailBookItem);
         price = rootView.findViewById(R.id.detailPriceF);
         deleteBtn = rootView.findViewById(R.id.deleteButton);
         updateBtn = rootView.findViewById(R.id.update_btn);
+        imageView = rootView.findViewById(R.id.itemImageDetails);
+        AddAProductFragment update = new AddAProductFragment();
+
+
         sendItemData();
-//        dateOfPurchased.setText(item.getYearOfPurchase().toString());
+        if(item.getYearOfPurchase() == null){
+
+        }
+        else{
+            dateOfPurchased.setText(String.valueOf(item.getYearOfPurchase()));
+        }
         name.setText(item.getName());
         brand.setText(item.getBrand());
         model.setText(item.getModel());
+        if(item.getImagepath() == null){
+            Picasso.get().load("https://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030").into(imageView);
+        }else{
+           Picasso.get().load(item.getImagepath()).into(imageView);
+        }
         itemStand.setText(item.getItem_stand());
         price.setText(item.getPrice() + " kr/day");
-        User user = (User) getArguments().getSerializable("user");
+        User user = (User) getArguments().getSerializable("name");
 
         if(user.getUserId() == item.getUserCreatorId()){
             bookButton.setVisibility(View.GONE);
-            wishListButton.setVisibility(View.GONE);
+
         }
         else{
             deleteBtn.setVisibility(View.GONE);
             updateBtn.setVisibility(View.GONE);
         }
 
-        wishListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,14 +110,15 @@ public class ItemDetailsFragment extends Fragment {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddAProductFragment update = new AddAProductFragment();
+
                 Bundle bunle = new Bundle();
                 bunle.putSerializable("itemToEdit", item);
                 bunle.putSerializable("rentUser", user);
 //                update.setArguments(bunle);
+                update.setArguments(bunle);
+//                Navigation.findNavController(view).navigate(R.id.action_itemDetailsFragment_to_addAProductFragment, bunle);
 
-                Navigation.findNavController(view).navigate(R.id.action_itemDetailsFragment_to_addAProductFragment, bunle);
-//                getParentFragmentManager().beginTransaction().replace(R.id.itemDetailsFragment, update);
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, update).commit();
             }
         });
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -154,18 +167,19 @@ public class ItemDetailsFragment extends Fragment {
         item = gson.fromJson(jsonItem, Item.class);
         return item;
     }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        NavController navController = NavHostFragment.findNavController(this);
-        MutableLiveData<Item> liveData = navController.getCurrentBackStackEntry()
-                .getSavedStateHandle()
-                .getLiveData("itemAdded");
-        liveData.observe(getViewLifecycleOwner(), new Observer<Item>() {
-            @Override
-            public void onChanged(Item addedItem) {
-                item = addedItem;
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        NavHostFragment navHost =new NavHostFragment();
+//        NavController navController = navHost.getNavController();
+//        MutableLiveData<Item> liveData = navController.getCurrentBackStackEntry()
+//                .getSavedStateHandle()
+//                .getLiveData("itemAdded");
+//        liveData.observe(getViewLifecycleOwner(), new Observer<Item>() {
+//            @Override
+//            public void onChanged(Item addedItem) {
+//                item = addedItem;
+//            }
+//        });
+//    }
 }

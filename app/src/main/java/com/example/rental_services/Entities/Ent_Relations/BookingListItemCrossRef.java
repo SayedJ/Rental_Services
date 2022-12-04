@@ -4,6 +4,6 @@ import androidx.room.Entity;
 
 @Entity(primaryKeys = {"bookingId", "itemId"})
 public class BookingListItemCrossRef {
-    public int bookingId;
-    public int itemId;
+    public long bookingId;
+    public long itemId;
 }

@@ -37,18 +37,18 @@ public interface ItemDao {
 
     @Transaction
     @Query("Select * from items_info where userCreatorId = :userId")
-    List<Item> getUserItems(int userId);
+    List<Item> getUserItems(long userId);
 
     @Transaction
     @Query("Select * from items_info where userCreatorId = :userId")
-    LiveData<List<Item>> getUserItemsLive(int userId);
+    LiveData<List<Item>> getUserItemsLive(long userId);
 
     @Delete
     void deleteItem(Item item);
 
     @Transaction
     @Query("select * from items_info where itemId = :itemId")
-    Item getItem(int itemId);
+    Item getItem(long itemId);
 
     @Update
     void updateItem(Item item);

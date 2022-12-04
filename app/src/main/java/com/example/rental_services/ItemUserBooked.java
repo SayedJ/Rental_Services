@@ -3,62 +3,87 @@ package com.example.rental_services;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ItemUserBooked#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.rental_services.Adapters.BookingAdapters;
+import com.example.rental_services.Adapters.ItemAdapters;
+import com.example.rental_services.Database.BookingWithDetails;
+import com.example.rental_services.Entities.Booking;
+import com.example.rental_services.Entities.User;
+import com.example.rental_services.ViewModels.ItemViewModel;
+
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ItemUserBooked extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ItemUserBooked() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ItemUserBooked.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ItemUserBooked newInstance(String param1, String param2) {
-        ItemUserBooked fragment = new ItemUserBooked();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    private long userId;
+     RecyclerView rc;
+    private TextView rentedItems;
+    private User user;
+    private BookingAdapters adapters;
+    private ItemViewModel viewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_user_booked, container, false);
+
+
+        userId = ((UserInfoActivity)getActivity()).getCurrentUser().getUserId();
+        ItemViewModel viewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
+        View view = inflater.inflate(R.layout.fragment_item_user_booked, container, false);
+        getActivity().setTitle("Rented Items");
+        rentedItems = view.findViewById(R.id.rentedItems);
+        rc = view.findViewById(R.id.rc);
+        rc.hasFixedSize();
+        user = ((UserInfoActivity)getActivity()).getCurrentUser();
+        adapters = new BookingAdapters(new ArrayList<>());
+        rc.setAdapter(adapters);
+        rc.setLayoutManager(new LinearLayoutManager(getContext()));
+        viewModel.getAllMyBookings(userId).observe(getActivity(), new Observer<List<BookingWithDetails>>() {
+            @Override
+            public void onChanged(List<BookingWithDetails> bookingWithDetails) {
+
+                adapters.setTheItemList(bookingWithDetails);
+                rentedItems.setText(String.valueOf(bookingWithDetails.size()));
+            }
+        });
+        adapters.setOnItemClickListener(new BookingAdapters.OnItemClickListener() {
+            @Override
+            public void onItemClick(BookingWithDetails item) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("itemAdded", (Serializable) item);
+            }
+
+            @Override
+            public void onDeleteClick(BookingWithDetails item) {
+
+            }
+
+            @Override
+            public void onUpdateClick(BookingWithDetails item) {
+
+            }
+        });
+
+        return view;
     }
 }

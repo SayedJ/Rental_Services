@@ -26,7 +26,7 @@ public class AddressFragment extends Fragment {
     EditText houseNo, streetNo, postalCode, city, country;
     Button confirmBtn;
     Address address;
-    int userId;
+    long userId;
 
     public AddressFragment() {
         // Required empty public constructor

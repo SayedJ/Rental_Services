@@ -19,7 +19,7 @@ import com.example.rental_services.Entities.Ent_Relations.BookingWithAllInfo;
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Item.class, Address.class, Booking.class, BookingInfo.class, Category.class, ItemInfo.class, Payment.class, Shipment.class, WishList.class, BookingWithAllInfo.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Item.class, Address.class, Booking.class, BookingInfo.class, Category.class, ItemInfo.class, Payment.class, Shipment.class, WishList.class, BookingWithAllInfo.class, BookingWithDetails.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class })
 public abstract class RentalServicesDataBase extends RoomDatabase{
 

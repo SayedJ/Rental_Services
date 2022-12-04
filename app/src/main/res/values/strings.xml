@@ -25,4 +25,6 @@
     <string name="next">Confirm/Next</string>
     <string name="payment">Choose a payment method</string>
     <string name="addProduct">Add</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

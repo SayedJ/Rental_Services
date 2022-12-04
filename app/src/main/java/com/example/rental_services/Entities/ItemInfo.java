@@ -9,27 +9,22 @@ import java.util.Date;
 @Entity(tableName = "item_availability_info")
 public class ItemInfo implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int itemInfoId;
+    private long itemInfoId;
     private boolean available;
     private boolean rented;
     private Date nextAvailableDate;
 
-
-
-    private int booking_info_id;
-
-    public ItemInfo(boolean available, boolean rented, Date nextAvailableDate, int booking_info_id) {
+    public ItemInfo(boolean available, boolean rented, Date nextAvailableDate) {
         this.available = available;
         this.rented = rented;
         this.nextAvailableDate = nextAvailableDate;
-        this.booking_info_id = booking_info_id;
     }
 
-    public int getItemInfoId() {
+    public long getItemInfoId() {
         return itemInfoId;
     }
 
-    public void setItemInfoId(int itemInfoId) {
+    public void setItemInfoId(long itemInfoId) {
         this.itemInfoId = itemInfoId;
     }
 
@@ -55,13 +50,5 @@ public class ItemInfo implements Serializable {
 
     public void setNextAvailableDate(Date nextAvailableDate) {
         this.nextAvailableDate = nextAvailableDate;
-    }
-
-    public int getBooking_info_id() {
-        return booking_info_id;
-    }
-
-    public void setBooking_info_id(int booking_info_id) {
-        this.booking_info_id = booking_info_id;
     }
 }

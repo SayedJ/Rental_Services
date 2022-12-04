@@ -57,7 +57,7 @@ public class profile_With_info extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("userId", getUserId());
+                bundle.putLong("userId", getUserId());
 
                 Navigation.findNavController(view).navigate(R.id.action_profile_With_info_to_userItemsAddedFragment, bundle);
             }
@@ -95,8 +95,8 @@ public class profile_With_info extends Fragment {
         userItems = ((UserInfoActivity)getActivity()).getUserItems();
         return userItems;
     }
-    public int getUserId(){
-        int userid = ((UserInfoActivity)getActivity()).getCurrentUser().getUserId();
+    public long  getUserId(){
+        long userid = ((UserInfoActivity)getActivity()).getCurrentUser().getUserId();
         return userid;
     }
 

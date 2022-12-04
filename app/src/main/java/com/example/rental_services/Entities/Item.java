@@ -3,6 +3,7 @@ package com.example.rental_services.Entities;
 import android.net.Uri;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -12,17 +13,17 @@ import java.util.Date;
 public class Item  implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int itemId;
+    private long itemId;
     private String name;
     private String model;
     private String brand;
     private Date yearOfPurchase;
     private String imagepath;
     private double price;
-    private int userCreatorId;
+    private long userCreatorId;
     private String item_stand;
 
-    public Item(String name, String model, String brand, Date yearOfPurchase, double price, int userCreatorId, String imagepath) {
+    public Item(String name, String model, String brand, Date yearOfPurchase, double price, long userCreatorId, String imagepath) {
         this.name = name;
         this.model = model;
         this.brand = brand;
@@ -31,23 +32,23 @@ public class Item  implements Serializable {
         this.price = price;
         this.userCreatorId = userCreatorId;
     }
-
+    @Ignore
     public Item(int position, String model, String brand) {
 
         this.name = model;
         this.brand = brand;
     }
-
+    @Ignore
     public Item() {
 
     }
 
 
-    public int getItemId() {
+    public long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(long itemId) {
         this.itemId = itemId;
     }
 
@@ -89,11 +90,11 @@ public class Item  implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
-    public int getUserCreatorId() {
+    public long getUserCreatorId() {
         return userCreatorId;
     }
 
-    public void setUserCreatorId(int userCreatorId) {
+    public void setUserCreatorId(long userCreatorId) {
         this.userCreatorId = userCreatorId;
     }
 

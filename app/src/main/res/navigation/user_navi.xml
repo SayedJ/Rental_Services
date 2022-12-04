@@ -85,18 +85,6 @@
         <action
             android:id="@+id/action_addAProductFragment_to_itemDetailsFragment"
             app:destination="@id/itemDetailsFragment" />
-        <action
-            android:id="@+id/action_addAProductFragment_to_uploadImage"
-            app:destination="@id/uploadImage" />
-    </fragment>
-    <fragment
-        android:id="@+id/uploadImage"
-        android:name="com.example.rental_services.uploadImage"
-        android:label="fragment_upload_image"
-        tools:layout="@layout/fragment_upload_image" >
-        <action
-            android:id="@+id/action_uploadImage_to_addAProductFragment"
-            app:destination="@id/addAProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/listOfItemsFragment"

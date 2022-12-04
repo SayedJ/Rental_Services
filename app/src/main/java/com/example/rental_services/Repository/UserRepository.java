@@ -3,16 +3,15 @@ package com.example.rental_services.Repository;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
-import android.telecom.Call;
 
 import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 
 import com.example.rental_services.DataAccessObject.BookingSetupDao;
 import com.example.rental_services.DataAccessObject.ItemDao;
 import com.example.rental_services.DataAccessObject.UserItemsDao;
+import com.example.rental_services.Database.BookingWithDetails;
 import com.example.rental_services.Database.RentalServicesDataBase;
 import com.example.rental_services.Entities.Address;
 import com.example.rental_services.Entities.Booking;
@@ -25,9 +24,8 @@ import com.example.rental_services.Entities.Payment;
 import com.example.rental_services.Entities.Shipment;
 import com.example.rental_services.Entities.User;
 
-import java.net.ResponseCache;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -81,8 +79,9 @@ public class UserRepository {
      return  userItemsDao.loadAllUser();
     }
     public LiveData<List<Item>> getAllItems(){return userItemsDao.loadAllItems();}
+    public LiveData<List<BookingWithDetails>> getAllBookingWithDetails(long id){ return bookingDao.getBookingWithDetails(id);}
     public void addToWishLIst(Item item){executors.execute(()-> itemdao.insertItemInWishList(item));}
-    public List<Item> userWithItems(int id)throws ExecutionException, InterruptedException {
+    public List<Item> userWithItems(long id)throws ExecutionException, InterruptedException {
         Callable<List<Item>> callable = new Callable<List<Item>>() {
             @Override
             public List<Item> call() throws Exception {
@@ -95,24 +94,114 @@ public class UserRepository {
 
     }
 //    public LiveData<Item> getItem(int itemId){return itemdao.getItem(itemId);}
-    public Item getItem(int itemId) throws ExecutionException, InterruptedException{
+    public Item getItem(long itemId) throws ExecutionException, InterruptedException{
         Callable<Item> callable = (Callable<Item>) () -> itemdao.getItem(itemId);
         Future<Item> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
     }
-    public void insertBooking(Booking booking){
-        executors.execute(()-> bookingDao.insertBooking(booking));
+    public long insertBooking(Booking booking){
+        Callable<Long> callable = (Callable<Long>) () ->  bookingDao.insertBooking(booking);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+    }
+    public long insertBookingWithDetails(BookingWithDetails bookingWithDetails){
+        Callable<Long> callable = (Callable<Long>) () ->  bookingDao.insertBookingWithDetails(bookingWithDetails);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+
+    }
+    public long insertBookingInfo(BookingInfo bookingInfo){
+        Callable<Long> callable = (Callable<Long>) () -> bookingDao.insertBookingSetup(bookingInfo);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+
+    }
+    public long insertShipment(Shipment shipment){
+        Callable<Long> callable = (Callable<Long>) () -> bookingDao.insertShipment(shipment);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+
+    }
+    public long insertAddress(Address address){
+
+        Callable<Long> callable = (Callable<Long>) () ->bookingDao.insertAddress(address);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+
+
+    }
+    public long insertPayment(Payment payment){
+
+        Callable<Long> callable = (Callable<Long>) () -> bookingDao.insertPayment(payment);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
+
+    }
+    public long insertItemInfo(ItemInfo itemInfo){
+        Callable<Long> callable = (Callable<Long>) () -> bookingDao.insertItemInfo(itemInfo);
+        long rowId = 0;
+        Future<Long> future = Executors.newSingleThreadExecutor().submit(callable);
+        try{
+            rowId = future.get();
+        } catch (InterruptedException e1){
+            e1.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        return rowId;
     }
 
-    public void insertBookingInfo(BookingInfo bookingInfo){executors.execute(()->bookingDao.insertBookingSetup(bookingInfo));}
-    public void insertShipment(Shipment shipment){executors.execute(()-> bookingDao.insertShipment(shipment));}
-    public void insertAddress(Address address){executors.execute(()-> bookingDao.insertAddress(address));}
-    public void insertPayment(Payment payment){executors.execute(()-> bookingDao.insertPayment(payment));}
-    public void insertItemInfo(ItemInfo itemInfo){executors.execute(()-> bookingDao.insertItemInfo(itemInfo));}
-
-    public LiveData<List<Booking>> getMyBooking(int id){return bookingDao.myBookings(id);}
+    public LiveData<List<Booking>> getMyBooking(long id){return bookingDao.myBookings(id);}
     public LiveData<List<Booking>> getAllBookings(){return bookingDao.getBooking();}
-    public LiveData<List<Item>> getuserAllItemsLive(int id){return itemdao.getUserItemsLive(id);};
+    public LiveData<List<Item>> getuserAllItemsLive(long id){return itemdao.getUserItemsLive(id);};
 //    public LiveData<List<UserWithItems>> getUsersWithItems(){
 //        return userItemsDao.loadUserAndItems();
     public void deleteItem(Item item)

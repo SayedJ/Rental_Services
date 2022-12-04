@@ -1,6 +1,7 @@
 package com.example.rental_services.Entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -9,24 +10,28 @@ import java.io.Serializable;
 public class Shipment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int shipmentId;
+    private long shipmentId;
     private boolean owner_delivery;
     private boolean pick_up;
     private boolean shipmentByPost;
-    private int addressId;
+    private long addressId;
 
-    public Shipment( boolean owner_delivery, boolean pick_up, boolean shipmentByPost, int addressId) {
+    public Shipment( boolean owner_delivery, boolean pick_up, boolean shipmentByPost, long addressId) {
         this.owner_delivery = owner_delivery;
         this.pick_up = pick_up;
         this.shipmentByPost = shipmentByPost;
         this.addressId = addressId;
     }
+    @Ignore
+    public Shipment() {
 
-    public int getShipmentId() {
+    }
+
+    public long getShipmentId() {
         return shipmentId;
     }
 
-    public void setShipmentId(int shipmentId) {
+    public void setShipmentId(long shipmentId) {
         this.shipmentId = shipmentId;
     }
 
@@ -54,11 +59,11 @@ public class Shipment implements Serializable {
         this.shipmentByPost = shipmentByPost;
     }
 
-    public int getAddressId() {
+    public long getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(long addressId) {
         this.addressId = addressId;
     }
 }

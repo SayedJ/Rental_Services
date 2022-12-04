@@ -40,7 +40,7 @@ public class ProfileFragment extends Fragment {
         booked = rootView.findViewById(R.id.imageBooked);
         infoUser = rootView.findViewById(R.id.infoUser);
         infoItems = rootView.findViewById(R.id.infoItems);
-        int userId = ((MainActivity)getActivity()).getCurrentUser().getUserId();
+        long userId = ((MainActivity)getActivity()).getCurrentUser().getUserId();
         infoUser.setText(((MainActivity)getActivity()).getCurrentUser().getUsername());
         int items= 0;
         try {

@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity(tableName = "address")
 public class Address  implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     private String house_No;
     private String streetName;
     private int postalCode;
@@ -17,10 +17,10 @@ public class Address  implements Serializable {
 
 
 
-    private int userCreatorId;
+    private long userCreatorId;
 
 
-    public Address(String house_No, String streetName, int postalCode, String city, String country, int userCreatorId) {
+    public Address(String house_No, String streetName, int postalCode, String city, String country, long userCreatorId) {
         this.house_No = house_No;
         this.streetName = streetName;
         this.postalCode = postalCode;
@@ -29,19 +29,19 @@ public class Address  implements Serializable {
         this.userCreatorId = userCreatorId;
     }
 
-    public int getUserCreatorId() {
+    public long getUserCreatorId() {
         return userCreatorId;
     }
 
-    public void setUserCreatorId(int userCreatorId) {
+    public void setUserCreatorId(long userCreatorId) {
         this.userCreatorId = userCreatorId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

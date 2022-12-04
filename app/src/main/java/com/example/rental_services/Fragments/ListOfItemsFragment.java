@@ -3,6 +3,7 @@ package com.example.rental_services.Fragments;
 import static com.example.rental_services.R.id.flFragment;
 import static com.example.rental_services.R.id.fragmentContainerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -67,11 +68,15 @@ public class ListOfItemsFragment extends Fragment {
             @Override
             public void onItemClick(Item item) {
                 final ItemDetailsFragment detailsFragment = new ItemDetailsFragment();
-                profile_With_info profileFragment = new profile_With_info();
+
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("user", user);
+                bundle.putSerializable("name", user);
                 bundle.putSerializable("itemAdded", item);
                 detailsFragment.setArguments(bundle);
+                Intent i = new Intent(getContext(), UserInfoActivity.class);
+                i.putExtras(bundle);
+                i.putExtra("fragment", 1);
+                startActivity(i);
 //
 //               NavHostFragment fragmentHost = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(flFragment);
 //                NavController navController = fragmentHost.getNavController();
@@ -79,7 +84,7 @@ public class ListOfItemsFragment extends Fragment {
 //                navController.navigate(R.id.itemDetailsFragment);
 
 
-                getParentFragmentManager().beginTransaction().replace(R.id.item_list,profileFragment).commit();
+//                getParentFragmentManager().beginTransaction().replace(R.id.item_list,profileFragment).commit();
             }
 
             @Override

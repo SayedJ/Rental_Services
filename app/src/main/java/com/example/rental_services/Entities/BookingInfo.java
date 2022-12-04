@@ -1,6 +1,7 @@
 package com.example.rental_services.Entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -8,25 +9,28 @@ import java.util.Date;
 @Entity(tableName = "booking_date_setup")
 public class BookingInfo implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int booking_info_id;
+    private long booking_info_id;
     private Date fromDate;
     private Date toDate;
     private Date bookedDate;
-    private int bookingId;
 
-    public BookingInfo( Date fromDate, Date toDate, Date bookedDate, int bookingId) {
+    public BookingInfo(Date fromDate, Date toDate, Date bookedDate) {
 
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.bookedDate = bookedDate;
-        this.bookingId = bookingId;
+
+    }
+    @Ignore
+    public BookingInfo() {
+
     }
 
-    public int getBooking_info_id() {
+    public long getBooking_info_id() {
         return booking_info_id;
     }
 
-    public void setBooking_info_id(int booking_info_id) {
+    public void setBooking_info_id(long booking_info_id) {
         this.booking_info_id = booking_info_id;
     }
 
@@ -54,11 +58,4 @@ public class BookingInfo implements Serializable {
         this.bookedDate = bookedDate;
     }
 
-    public int getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
 }
