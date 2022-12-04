@@ -54,10 +54,12 @@ User must be able to pay for the item.
 
 
 
-
+////////////////////////////////////////////
 
 
 Not fulfilled
+
+
 User:
 
 Must’ve
