@@ -1,3 +1,8 @@
+Correct Youtube Link With Audio
+https://www.youtube.com/watch?v=NjftEhi-nuE
+
+
+
 # Rental_Services
 
 The purpose of this project is to provide users with a user friendly and trusted platform that will facilitate renting out various products and eliminating the need to scour the internet for the desired product by centralizing every renting possibility into one place.
@@ -57,8 +62,7 @@ User must be able to pay for the item.
 ////////////////////////////////////////////
 
 
-Not fulfilled
-
+read the details 
 
 User:
 
@@ -66,7 +70,7 @@ Must’ve
 
 User must be able to register and create an account.
 
-User can register and his information will be stored in the room database. 
+User can register and his information will be stored in the room database. / Easy to implement. forgot to Implement. used mostly prepopulated data to login 
 
 
 User must be able to login into the account.
